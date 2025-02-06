@@ -25,7 +25,7 @@
         img {
             width: 250px;
             border-radius: 10px;
-            transition: opacity 1s ease-in-out;
+            transition: opacity 1s ease-in-out, transform 0.3s ease-in-out;
         }
         h1 {
             font-size: 2em;
@@ -50,12 +50,43 @@
         .open-gift:hover {
             background: #d81b60;
         }
+        .shake {
+            animation: shake 0.2s ease-in-out 3;
+        }
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+            100% { transform: translateX(0); }
+        }
+        .fade-out {
+            animation: fadeOut 1s ease-in-out forwards;
+        }
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
     </style>
     <script>
+        let clicks = 0;
+        const totalClicks = 5;
+        
         function abrirRegalo() {
-            document.getElementById('giftImage').src = "https://files.oaiusercontent.com/file-3aHM9wyg3JeTD4pcSkQcMA?se=2025-02-06T05%3A36%3A31Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D84ad7644-fda2-4e49-8da2-dd7040bb6f8a.webp&sig=ElZnLe3dUAqWyjcTlNw8yLUSyolDeiieJvgMN2m6P1o%3D";
-            document.getElementById('question').style.display = 'block';
-            document.getElementById('openButton').style.display = 'none';
+            clicks++;
+            const img = document.getElementById('giftImage');
+            img.classList.add('shake');
+            setTimeout(() => img.classList.remove('shake'), 300);
+
+            if (clicks >= totalClicks) {
+                img.classList.add('fade-out');
+                setTimeout(() => {
+                    img.src = "https://files.oaiusercontent.com/file-3aHM9wyg3JeTD4pcSkQcMA?se=2025-02-06T05%3A36%3A31Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D84ad7644-fda2-4e49-8da2-dd7040bb6f8a.webp&sig=ElZnLe3dUAqWyjcTlNw8yLUSyolDeiieJvgMN2m6P1o%3D";
+                    img.classList.remove('fade-out');
+                    document.getElementById('question').style.display = 'block';
+                    document.getElementById('openButton').style.display = 'none';
+                }, 1000);
+            }
         }
     </script>
 </head>

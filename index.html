@@ -15,12 +15,12 @@
             background-color: #ffdde1;
             overflow: hidden;
             flex-direction: column;
+            text-align: center;
         }
         h1 {
             font-size: 2.5em;
             color: #ff3366;
-            position: absolute;
-            top: 10%;
+            margin-bottom: 20px;
         }
         .container {
             text-align: center;
@@ -54,13 +54,44 @@
             opacity: 0.8;
             animation: fall linear infinite;
         }
+        .buttons {
+            margin-top: 20px;
+        }
+        .btn {
+            font-size: 18px;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        .yes {
+            background-color: #ff3366;
+            color: white;
+        }
+        .no {
+            background-color: #cccccc;
+            color: black;
+            position: absolute;
+        }
     </style>
 </head>
 <body>
-    <h1>Buenas noches mi amor</h1>
-    <div class="container">
-        <img class="image" src="https://files.oaiusercontent.com/file-BmVnovbYQJNnyuPKMwXKj1?se=2025-02-06T06%3A14%3A41Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3Dc4602974-0efe-483c-9c28-c551e64c70be.webp&sig=N2N5xcFvkM0UvcorVpjabH%2BLSZlHombV9GjQV88pELQ%3D" alt="Imagen Romántica">
-        <button class="button" onclick="openGift()">Abrir regalo</button>
+    <div id="page1">
+        <h1>Buenas noches mi amor</h1>
+        <div class="container">
+            <img class="image" src="https://files.oaiusercontent.com/file-BmVnovbYQJNnyuPKMwXKj1?se=2025-02-06T06%3A14%3A41Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3Dc4602974-0efe-483c-9c28-c551e64c70be.webp&sig=N2N5xcFvkM0UvcorVpjabH%2BLSZlHombV9GjQV88pELQ%3D" alt="Imagen Romántica">
+            <button class="button" onclick="openGift()">Abrir regalo</button>
+        </div>
+    </div>
+    
+    <div id="page2" style="display: none;">
+        <h1>¿Quieres ser mi San Valentín?</h1>
+        <img src="https://files.oaiusercontent.com/file-3aHM9wyg3JeTD4pcSkQcMA?se=2025-02-06T06%3A14%3A41Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D84ad7644-fda2-4e49-8da2-dd7040bb6f8a.webp&sig=nbtE/zL6SAmJSPKY11ELBPnCPbZw3HqNS5DY4g7iglE%3D" alt="Imagen sorpresa">
+        <div class="buttons">
+            <button class="btn yes" onclick="alert('💖 ¡Sabía que dirías que sí! 💖')">Sí quiero</button>
+            <button class="btn no" id="noBtn">No quiero</button>
+        </div>
     </div>
     
     <script>
@@ -77,11 +108,16 @@
         setInterval(() => createFallingElement(Math.random() > 0.5 ? "heart" : "star"), 300);
         
         function openGift() {
-            alert("🎉 ¡Sorpresa! 🎉");
-            setTimeout(() => {
-                window.location.href = "valentine.html";
-            }, 1000);
+            document.getElementById("page1").style.display = "none";
+            document.getElementById("page2").style.display = "block";
         }
+        
+        document.getElementById("noBtn").addEventListener("mouseover", function() {
+            let x = Math.random() * (window.innerWidth - 100);
+            let y = Math.random() * (window.innerHeight - 50);
+            this.style.left = x + "px";
+            this.style.top = y + "px";
+        });
     </script>
 </body>
 </html>

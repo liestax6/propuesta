@@ -28,7 +28,10 @@
         img {
             width: 250px;
             border-radius: 10px;
-            transition: opacity 1s ease-in-out, transform 0.3s ease-in-out;
+            transition: opacity 1s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.5s ease-in-out;
+        }
+        img.glow {
+            box-shadow: 0 0 20px rgba(255, 105, 180, 0.8);
         }
         h1 {
             font-size: 2em;
@@ -70,21 +73,6 @@
             from { opacity: 1; }
             to { opacity: 0; }
         }
-        .confetti {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: #ff4081;
-            opacity: 0.7;
-            border-radius: 50%;
-            top: 50%;
-            left: 50%;
-            animation: confetti-fall 2s linear infinite;
-        }
-        @keyframes confetti-fall {
-            from { transform: translateY(0) rotate(0deg); opacity: 1; }
-            to { transform: translateY(300px) rotate(360deg); opacity: 0; }
-        }
     </style>
     <script>
         let clicks = 0;
@@ -93,29 +81,17 @@
         function abrirRegalo() {
             clicks++;
             const img = document.getElementById('giftImage');
-            img.classList.add('shake');
+            img.classList.add('shake', 'glow');
             setTimeout(() => img.classList.remove('shake'), 300);
 
             if (clicks >= totalClicks) {
-                lanzarConfeti();
                 img.classList.add('fade-out');
                 setTimeout(() => {
                     img.src = "https://files.oaiusercontent.com/file-3aHM9wyg3JeTD4pcSkQcMA?se=2025-02-06T05%3A36%3A31Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D84ad7644-fda2-4e49-8da2-dd7040bb6f8a.webp&sig=ElZnLe3dUAqWyjcTlNw8yLUSyolDeiieJvgMN2m6P1o%3D";
-                    img.classList.remove('fade-out');
+                    img.classList.remove('fade-out', 'glow');
                     document.getElementById('question').style.display = 'block';
                     document.getElementById('openButton').style.display = 'none';
                 }, 1000);
-            }
-        }
-        
-        function lanzarConfeti() {
-            for (let i = 0; i < 30; i++) {
-                let confetti = document.createElement("div");
-                confetti.className = "confetti";
-                confetti.style.left = Math.random() * window.innerWidth + "px";
-                confetti.style.top = Math.random() * window.innerHeight + "px";
-                document.body.appendChild(confetti);
-                setTimeout(() => confetti.remove(), 2000);
             }
         }
     </script>
@@ -126,11 +102,6 @@
         <img id="giftImage" src="https://files.oaiusercontent.com/file-BmVnovbYQJNnyuPKMwXKj1?se=2025-02-06T05%3A36%3A16Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3Dc4602974-0efe-483c-9c28-c551e64c70be.webp&sig=cfSzGD%2B/9WvckD7vRSX4a%2Bg2fu9eEfUgQnG00NhetVM%3D" alt="Regalo de San Valentín">
         <div class="buttons">
             <button id="openButton" class="btn open-gift" onclick="abrirRegalo()">Abrir regalo</button>
-        </div>
-        <div id="question" style="display: none;">
-            <h1>¿Quisieras ser mi San Valentín? 💖</h1>
-            <button class="btn open-gift" onclick="alert('¡Sabía que dirías que sí! 💘')">Sí</button>
-            <button class="btn" onclick="alert('¡Pues te lo pierdes! 😤')">No</button>
         </div>
     </div>
 </body>

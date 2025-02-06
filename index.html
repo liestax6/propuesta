@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>¿Quieres ser mi San Valentín?</title>
+    <title>Regalo de San Valentín</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -25,6 +25,7 @@
         img {
             width: 250px;
             border-radius: 10px;
+            transition: opacity 1s ease-in-out;
         }
         h1 {
             font-size: 2em;
@@ -42,30 +43,33 @@
             border-radius: 8px;
             transition: 0.3s;
         }
-        .yes {
+        .open-gift {
             background: #ff4081;
             color: white;
         }
-        .yes:hover {
+        .open-gift:hover {
             background: #d81b60;
         }
-        .no {
-            background: #555;
-            color: white;
-        }
-        .no:hover {
-            background: #222;
-        }
     </style>
+    <script>
+        function abrirRegalo() {
+            document.getElementById('giftImage').src = "https://files.oaiusercontent.com/file-3aHM9wyg3JeTD4pcSkQcMA?se=2025-02-06T05%3A36%3A31Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D84ad7644-fda2-4e49-8da2-dd7040bb6f8a.webp&sig=ElZnLe3dUAqWyjcTlNw8yLUSyolDeiieJvgMN2m6P1o%3D";
+            document.getElementById('question').style.display = 'block';
+            document.getElementById('openButton').style.display = 'none';
+        }
+    </script>
 </head>
 <body>
     <div class="container">
         <h1>Te traje un regalo 🎁</h1>
-        <img src="https://files.oaiusercontent.com/file-BmVnovbYQJNnyuPKMwXKj1?se=2025-02-06T05%3A36%3A16Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3Dc4602974-0efe-483c-9c28-c551e64c70be.webp&sig=cfSzGD%2B/9WvckD7vRSX4a%2Bg2fu9eEfUgQnG00NhetVM%3D" alt="Regalo de San Valentín">
-        <h1>¿Quisieras ser mi San Valentín? 💖</h1>
+        <img id="giftImage" src="https://files.oaiusercontent.com/file-BmVnovbYQJNnyuPKMwXKj1?se=2025-02-06T05%3A36%3A16Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3Dc4602974-0efe-483c-9c28-c551e64c70be.webp&sig=cfSzGD%2B/9WvckD7vRSX4a%2Bg2fu9eEfUgQnG00NhetVM%3D" alt="Regalo de San Valentín">
         <div class="buttons">
-            <button class="btn yes" onclick="alert('¡Sabía que dirías que sí! 💘')">Sí, mi amor</button>
-            <button class="btn no" onclick="alert('¡Pues te lo pierdes! 😤')">No, jódete</button>
+            <button id="openButton" class="btn open-gift" onclick="abrirRegalo()">Abrir regalo</button>
+        </div>
+        <div id="question" style="display: none;">
+            <h1>¿Quisieras ser mi San Valentín? 💖</h1>
+            <button class="btn open-gift" onclick="alert('¡Sabía que dirías que sí! 💘')">Sí, mi amor</button>
+            <button class="btn" onclick="alert('¡Pues te lo pierdes! 😤')">No, jódete</button>
         </div>
     </div>
 </body>
